@@ -5,9 +5,62 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:#89d1ce78;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.alert-box{
+  position:absolute;
+  z-index: 200;
+}
+
+.login-page{
+  background: #5ce4c6;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  width: 294px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translate(0,50%);
+  transform: translate(0,50%);
+}
+
+.login-page .form-control{
+  background-color: #e9ecef;
+}
+
+.login-lable{
+  padding: 20px;
+  text-align: center;
+  font: small-caps bold 24px/1 sans-serif;
+}
+.col-pad{
+  padding-top: 10px;
+}
+
+.small-lable{
+  text-align: center;
+  padding: 15px;
+}
+
+.nav-bar-text{
+  padding:5px;
+  color: #f8f9fa !important;
+}
+
+.login-page button[type="button"]{
+    
+}
+
+
+
+
+

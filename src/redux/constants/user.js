@@ -1,0 +1,7 @@
+export const USER_LOGIN_REQ = "USER_LOGIN_REQ"
+export const USER_LOGIN_SUC = "USER_LOGIN_SUC"
+export const USER_LOGIN_FAI = "USER_LOGIN_FAI"
+
+export const USER_LOGOUT_REQ = "USER_LOGOUT_REQ"
+export const USER_LOGOUT_SUC = "USER_LOGOUT_SUC"
+export const USER_LOGOUT_FAI = "USER_LOGOUT_FAI"

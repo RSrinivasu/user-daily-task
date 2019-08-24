@@ -9,8 +9,6 @@ import { BrowserRouter } from 'react-router-dom'
 // import { createHashHistory } from 'history'
 import { PersistGate } from 'redux-persist/integration/react';
 
-
-
 ReactDOM.render(
 <Provider store= {store}>
     <PersistGate loading={null} persistor= {persistor}>

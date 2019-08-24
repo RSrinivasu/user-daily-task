@@ -2,16 +2,20 @@ import React from 'react'
 import { Route , Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import  AppPage  from './Components/AppPage/AppPage'
-
+import _Navbar from './Components/AppPage/NavBar';
+import { Container } from 'react-bootstrap';
     
 function Main(props){
     let { user } = props
     if(user.response)
     {
-        return(        
-        <div>
-            <Route path="/" render={()=><AppPage />} />
-        </div>
+        return(   
+        <>
+            <_Navbar />     
+            <Container>
+                <Route path="/" render={()=><AppPage />} />
+            </Container>
+        </>
     )
     }
     else{

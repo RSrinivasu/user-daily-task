@@ -1,16 +1,18 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
 import _Navbar from './NavBar';
+// import { Carousel } from 'react-bootstrap';
+
+import Carousel from '../Carousel'
 
 class AppPage extends React.Component
 {
 
     render(){
         return(
-            <Container>
-                <_Navbar />
-                <h1 className="text-center">Hi Welcome</h1>
-            </Container>
+        <div>
+            <Carousel dots={false}  infinite = {true} />
+            <Carousel dots={true} slidesToScroll={3} infinite = {true} autoplay={ true} autoplaySpeed={1000}/>
+        </div>
         )
     }
 

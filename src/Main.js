@@ -7,13 +7,15 @@ import { Container } from 'react-bootstrap';
     
 function Main(props){
     let { user } = props
+    
     if(user.response)
     {
         return(   
         <>
             <_Navbar />     
             <Container>
-                <Route path="/" render={()=><AppPage />} />
+                <Route path="/" exact render={ ()=> <Redirect to="/user-dialy-task"/> }/> 
+                <Route path="/user-dialy-task" render={()=><AppPage />} />
             </Container>
         </>
     )

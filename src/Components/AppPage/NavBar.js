@@ -6,7 +6,11 @@ import * as userAction from '../../redux/actions/userAction'
 
 
 function _Navbar(props){
-    let {name, url} = props.user.response
+    let {
+        data:{
+           url,name
+        } 
+    } = props.user.response
     return(
     <>
         <Navbar bg="primary" variant="dark">

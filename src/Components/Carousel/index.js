@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { Card , Row} from 'react-bootstrap'
+import CustomCard from "../utilities/CustomCard";
 
 
 function Carousel({ dots, slidesToScroll , infinite  , autoplay, autoplaySpeed}) {
@@ -23,22 +23,6 @@ function Carousel({ dots, slidesToScroll , infinite  , autoplay, autoplaySpeed})
         }
         </Slider>
     </div>
-    )
-}
-
-
-function CustomCard({img,index}){
-    return (
-    <Card style={{ width: '18rem' }} >
-        <Card.Img variant="top" src={img} />
-        <Card.Body>
-            <Card.Title>Card Title {index+1} </Card.Title>
-            <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-            </Card.Text>
-        </Card.Body>
-    </Card>
     )
 }
 

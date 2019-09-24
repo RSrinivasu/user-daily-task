@@ -3,24 +3,32 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import GoogleLogin from 'react-google-login'
 import * as userAction from '../../redux/actions/userAction'
-import google from '../icons/google-brands.svg'
+import { Redirect } from 'react-router-dom'
 
 
 class CustomGoogleButton extends React.Component
 {
+    constructor(props){
+        super(props)
+        this.state = {
+            redirected:false
+        }
+    }
+
     googleLoginHandle =(res)=>{
         if(res){
-        let { profileObj }= res
-        let data = {
-            name:profileObj.name,
-            url:profileObj.imageUrl
+            let { profileObj ,accessToken  }= res
+            let data = {
+                name:profileObj.name,
+                url:profileObj.imageUrl,
+                clientId: profileObj.googleId,
+                email:profileObj.email,
+                accessToken:accessToken
+            }
+            this.props.user.login(data)
         }
-        this.props.user.fbLogin(data)
-        window.location.href ="/"
     }
-
-    }
-
+  
     render(){
         return(
             <GoogleLogin

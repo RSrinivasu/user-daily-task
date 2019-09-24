@@ -17,7 +17,7 @@ class CustomFBLoginButton extends React.Component
                 name: res.name,
                 url: res.picture.data.url
             } 
-            this.props.user.fbLogin(data)
+            this.props.user.login(data)
             window.location.href ="/"
         }
     }

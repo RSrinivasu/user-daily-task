@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import GoogleLogin from 'react-google-login'
 import * as userAction from '../../redux/actions/userAction'
 import { Redirect } from 'react-router-dom'
+import {Button} from 'react-bootstrap'
+import google from '../icons/google-brands.svg'
 
 
 class CustomGoogleButton extends React.Component
@@ -33,13 +35,11 @@ class CustomGoogleButton extends React.Component
         return(
             <GoogleLogin
                 clientId="728953728341-10c1q023rrlvqgi98rcbfmu477o1rfm5.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
-                buttonText="Google"
+                //buttonText="Google"
+                render={(props)=><Button  variant="outline-primary"
+                    className={"btn  btn-block btn-sm"}  onClick={props.onClick}><img alt="" src={google} width={20}/>Google</Button> }
                 onSuccess={this.googleLoginHandle}
                 // onFailure={this.googleLoginHandle}
-                icon ={true}
-                style={{"width":"15px"}}
-                fetchBasicProfile={true}
-                cssClass="btn btn-outline-primary btn-block btn-sm"
             />
         )
     }

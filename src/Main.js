@@ -4,18 +4,19 @@ import { connect } from 'react-redux'
 import  AppPage  from './Components/AppPage/AppPage'
 import _Navbar from './Components/AppPage/NavBar';
 import { Container } from 'react-bootstrap';
+import Firends from './Components/Firends';
     
 function Main(props){
     let { user } = props
-    
     if(user.response)
     {
         return(   
         <>
             <_Navbar />     
             <Container>
-                <Route path="/" exact render={ ()=> <Redirect to="/user-dialy-task"/> }/> 
-                <Route path="/user-dialy-task" render={()=><AppPage />} />
+                {/* <Route path="/" exact render={ ()=> <Redirect to="/user-dialy-task"/> }/>  */}
+                <Route exact path="/" render={()=><AppPage />} />
+                <Route exact path="/friends" render={()=><Firends />} />
             </Container>
         </>
     )

@@ -43,7 +43,7 @@ let userReducer = (state=userState, action)=>{
             })  
             
         default:
-            return userState
+            return state
     }
 }
 

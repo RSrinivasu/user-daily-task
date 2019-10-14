@@ -14,9 +14,9 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/user-dialy-task"/>}/> 
+          {/* <Route exact path="/" render={() => <Redirect to="/"/>}/>  */}
           <Route path="/login" name="login" component={()=><Login/>} />
-          <Route path="/user-dialy-task" component={() => <Main />} /> */}
+          <Route path="/" component={() => <Main />} /> }
         </Switch>
       </div>
     );

@@ -10,7 +10,7 @@ let appReducer = (state=initialState, action)=>{
         case types.INITIAL_APP:
             return Object.assign({}, state)
         default:
-            return initialState
+            return state
     }
 }
 

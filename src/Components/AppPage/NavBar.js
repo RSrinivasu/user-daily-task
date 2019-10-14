@@ -23,6 +23,8 @@ function _Navbar(props){
                 className="d-inline-block align-top"
                 />
             <Navbar.Text variant="dark" className="nav-bar-text" >{name}</Navbar.Text>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/friends">Friends</Nav.Link>
             </Nav>
             <Nav>
                 <Button onClick={() => props.actions.logout()}> Logout</Button>

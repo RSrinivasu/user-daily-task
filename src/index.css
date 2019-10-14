@@ -60,6 +60,12 @@ code {
     
 }
 
+.loding-page{
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  top:50%;
+}
 
 .slider-view{
   margin-top: 20px;

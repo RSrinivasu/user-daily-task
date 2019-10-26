@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { Navbar ,Nav, Button}from 'react-bootstrap'
 import * as userAction from '../../redux/actions/userAction'
-
+import history  from '../../redux/history'
 
 function _Navbar(props){
     let {
@@ -11,6 +11,12 @@ function _Navbar(props){
            url,name
         } 
     } = props.user.response
+
+    function onSelect(e,s){
+        console.log(e,s)
+
+    }
+
     return(
     <>
         <Navbar bg="primary" variant="dark">
@@ -23,8 +29,13 @@ function _Navbar(props){
                 className="d-inline-block align-top"
                 />
             <Navbar.Text variant="dark" className="nav-bar-text" >{name}</Navbar.Text>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/friends">Friends</Nav.Link>
+            <Nav.Item as="li">
+                <Nav.Link href="/">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item as="li">
+                <Nav.Link  href="/friends" >Friends</Nav.Link>
+            </Nav.Item>
+            {/* <Button onClick={() => history.push('/friends')}> Friends</Button> */}
             </Nav>
             <Nav>
                 <Button onClick={() => props.actions.logout()}> Logout</Button>

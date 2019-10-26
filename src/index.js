@@ -5,16 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store , persistor } from './redux/middleware'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-// import { createHashHistory } from 'history'
+import { Router } from 'react-router-dom'
+
 import { PersistGate } from 'redux-persist/integration/react';
+import history from './redux/history'
 
 ReactDOM.render(
 <Provider store= {store}>
     <PersistGate loading={null} persistor= {persistor}>
-        <BrowserRouter>
+        <Router history={history}>
             <App />
-        </BrowserRouter>
+        </Router>
     </PersistGate>
 </Provider>
 , document.getElementById('root'));

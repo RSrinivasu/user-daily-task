@@ -1,5 +1,6 @@
 import * as types from '../constants/user'
-import axios from 'axios'
+import axios from './axios'
+
 
 // Sign in Actions
 
@@ -34,15 +35,13 @@ export const login = (user) => {
   return async dispatch => {
     try {
       dispatch(loginRequest())
-      console.log(user)
       //let { data } = await axios.post('http://e6eab2a3.ngrok.io/user-daily-task/v1/login',user,config)
       let { data } = await axios({
             method: 'post',
-            url: 'http://localhost:3030/user-daily-task/v1/login',
+            url: `${process.env.REACT_APP_USER_TASK_API}/login`,
             data: user
         });
       dispatch(loginSuccess(data))
-      window.location.href ="/"
     } catch (e) {
       console.log(e)
       dispatch(loginFail())

@@ -71,4 +71,25 @@ code {
   margin-top: 20px;
 }
 
+.button-action{
+  cursor: pointer;
+  width: 30px
+}
 
+.button-action:hover{
+  background-color: #5ce4c6;
+  width: 31px;
+}
+
+
+/**
+  * chat popup window
+*/
+.chat-popup {
+    /* display: none; */
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}

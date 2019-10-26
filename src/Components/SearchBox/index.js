@@ -3,16 +3,15 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as friensAction from '../../redux/actions/friendsAction'
 import './index.css'
-import { Button, Badge } from 'react-bootstrap'
+import { Button, Badge , Spinner} from 'react-bootstrap'
 
 
 function SearchBox(props){
-    let { actions , searchList } = props
+    let { actions , searchList , updateFriend } = props
     let [userInput, setUserInput] = useState("")
     let [showSuggestions, setShowSuggestions] =useState(false)
     let [filterSuggestions, setFilterSuggestions] = useState([])
     let [activeSuggestionsIndex, setActiveSuggestionsIndex] = useState(0)
-
 
     function onChange(e){
         let value = e.target.value
@@ -31,6 +30,10 @@ function SearchBox(props){
         }
     })
 
+    function onClick(update){
+        console.log("onclick function ",update)
+        actions.updateFriend(update, userInput)
+    }
 
     function onKeyDown(e){
         setActiveSuggestionsIndex(1)
@@ -53,6 +56,8 @@ function SearchBox(props){
                             showSuggestions= {showSuggestions}
                             filterSuggestions={filterSuggestions}
                             activeSuggestionsIndex= {activeSuggestionsIndex}
+                            onClick= {onClick}
+                            updateFriend = {updateFriend}
                             />
         </div>
         </Fragment>
@@ -61,7 +66,7 @@ function SearchBox(props){
 }
 
 function SuggestionsListComponent(props){
-    let {showSuggestions, userInput , filterSuggestions,activeSuggestionsIndex } = props
+    let {showSuggestions, userInput , filterSuggestions,activeSuggestionsIndex , updateFriend,onClick } = props
     let suggestionsComponent =""
     if(showSuggestions && userInput){
         if(filterSuggestions && filterSuggestions.length > 0){
@@ -82,11 +87,15 @@ function SuggestionsListComponent(props){
                             }
                             return(
                                 <li className={className} key={index}>
-                                    <DisplaySaggesations 
+                                    <DisplaySaggesations
+                                        id={suggestions.clientId} 
                                         url={suggestions.url} 
                                         name={suggestions.name}
                                         request={request}
-                                        status={_status}/>
+                                        status={_status}
+                                        onClick={onClick}
+                                        updateFriend = {updateFriend}
+                                        />
                                 </li>
                             )
                         })
@@ -105,28 +114,55 @@ function SuggestionsListComponent(props){
     return suggestionsComponent
 }
 
+
+
 function DisplaySaggesations(props){
-    console.log(props)
-    let {url , name , request , status } = props    
-    return(
-        <div className="view-card">
-            <img src={url} alt="invalid" />
-            <div className="label">
-                <div>{ name }</div> 
-                { request ?<Button variant="outline-primary" >{request}</Button>:null}
-                { status ?
-                    status.code === 3 ?<Button variant="outline-primary" >{status.meaning}</Button> :
-                       <h5><Badge pill variant="secondary">{status.meaning}</Badge></h5>
-                    :null
-                }
+    let {url , name , request , status , id ,updateFriend , onClick } = props  
+    let { update_loading } = updateFriend
+    if( update_loading && updateFriend.id === id ){
+        return <SpinnerButton />
+    }
+    else{
+        return(
+            <div className="view-card">
+                <img src={url} alt="invalid" />
+                <div className="label">
+                    <div>{ name }</div> 
+                    { request ? <Button variant="outline-primary" 
+                                onClick={() =>onClick({status:1, to:id})} >{request}</Button>:
+                                null}
+                    { status ?
+                        status.code === 2 ?<h4><Badge pill variant="secondary">{status.meaning}</Badge></h4>:
+                        <Button variant="outline-primary"
+                                onClick={() =>onClick({status:status.code, to:id})} >{status.meaning}</Button>
+                        :null
+                    }
+                </div>
             </div>
+        )
+    }
+}
+
+function SpinnerButton(){
+    return(
+    <>
+       <div className="card-loading">
+        <div className="spinners">
+            <Spinner animation="grow" variant="success" />
+            <Spinner animation="grow" variant="danger" />
+            <Spinner animation="grow" variant="warning" />
+            <Spinner animation="grow" variant="info" />
+            <Spinner animation="grow" variant="light" />
+            <Spinner animation="grow" variant="dark" />
         </div>
-    )
+       </div>
+    </>)
 }
 
 
 const mapStateToProps =(state)=>({
-    searchList: state.friendSearchList
+    searchList: state.friendSearchList,
+    updateFriend:state.updateFriend
 })
 
 const mapDispatchToprops=(dispatch)=>({

@@ -1,7 +1,7 @@
 import * as types from '../constants/friends'
-import axios from 'axios'
+import axios from './axios'
 
-// Sign in Actions
+// *****friend list********
 
 export const friendListSuccess = (payload) => ({
   type: types.FRIENDS_LIST_SUC,
@@ -16,6 +16,7 @@ export const friendListRequest = () => ({
   type: types.FRIENDS_LIST_REQ
 })
 
+//**********search**********
 
 export const searchFriendSuccess = (payload) => ({
   type: types.FRIENDS_SEARCH_SUC,
@@ -27,33 +28,44 @@ export const searchFriendFail = () => ({
 })
 
 export const searchFriendRequest = () => ({
-  type: types.FRIENDS_SEARCH_REQ
+  type: types.FRIENDS_SEARCH_REQ,
+})
+
+//***********update***************
+
+export const updateFriendSuccess = (payload) => ({
+  type: types.UPDATE_FRIENDS_SUC,
+  data:payload
+})
+
+export const updateFriendFail = () => ({
+  type: types.UPDATE_FRIENDS_FAI
+})
+
+export const updateFriendRequest = (id) => ({
+  type: types.UPDATE_FRIENDS_REQ,
+  data:id
 })
 
 export const friendsList = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
       dispatch(friendListRequest())
-      //let { data } = await axios.post('http://localhost:3030/user-daily-task/v1/login')
-      let data ={
-        success:true,
-        message: "get succusess",
-          data:[{
-            name:"srinu",
-            url:"",
-            frinds:""
-          },
-          {
-            name:"ramu",
-            url:"",
-            frinds:""
-          },
-          {
-            name:"nayak",
-            url:"",
-            frinds:""
-          }]
-      } 
+      let {
+        user:{
+          response:{
+            data:{
+              accessToken
+            }
+          }
+        }
+      } = getState()
+      let options = {
+        headers:{
+        "access-token": accessToken
+        }
+      }
+      let { data } = await axios.get(`${process.env.REACT_APP_USER_TASK_API}/friend` , options)
       dispatch(friendListSuccess(data))
     } catch (e) {
       console.log(e)
@@ -80,7 +92,7 @@ export const searchFriends = (q) => {
         "access-token": accessToken
         }
       }
-      let { data } = await axios.get(`http://localhost:3030/user-daily-task/v1/search?q=${q}`,options)
+      let { data } = await axios.get(`${process.env.REACT_APP_USER_TASK_API}/search?q=${q}`,options)
       dispatch(searchFriendSuccess(data))
     } catch (e) {
       console.log(e)
@@ -89,3 +101,38 @@ export const searchFriends = (q) => {
   }
 }
 
+
+export const updateFriend = (update, searchWord) => {
+  return async (dispatch, getState) => {
+    console.log("action" ,update)
+    try {
+      let {
+        user:{
+          response:{
+            data:{
+              accessToken,
+              clientId
+            }
+          }
+        }
+      } = getState()
+      dispatch(updateFriendRequest(update.to))
+      let options = {
+        headers:{
+        "access-token": accessToken
+        }
+      }
+      let body={
+        from:clientId,
+        to:update.to,
+        status:update.status
+      }
+      let { data } = await axios.put(`${process.env.REACT_APP_USER_TASK_API}/friend`,body ,options)
+      dispatch(updateFriendSuccess(data))
+      dispatch(searchFriends(searchWord))
+    } catch (e) {
+      console.log(e)
+      dispatch(updateFriendFail())
+    }
+  }
+}

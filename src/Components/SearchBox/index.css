@@ -55,6 +55,7 @@
     border-bottom: 1px solid #999;
   }
 
+
   .view-card img{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -68,3 +69,11 @@
         justify-content: space-between;
   }
   
+  .card-loading{
+    height: 60px;
+  }
+  .card-loading .spinners{
+    text-align: center;
+    margin-top: 36px;
+
+  }

@@ -4,12 +4,17 @@ import { connect } from 'react-redux'
 import  AppPage  from './Components/AppPage/AppPage'
 import _Navbar from './Components/AppPage/NavBar';
 import { Container } from 'react-bootstrap';
-import Firends from './Components/Firends';
+import Firends from './Components/Friends';
     
 function Main(props){
     let { user } = props
+
     if(user.response)
     {
+        let { response:{data:{clientId}}} = user
+        window.socket.on(clientId,function(msg){
+            console.log("ressssssssssssssssssss",msg)
+        })
         return(   
         <>
             <_Navbar />     

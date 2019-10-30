@@ -52,6 +52,7 @@ class Friends extends React.Component{
     render(){
         let { chatList, chatHistory } = this.state
         let { response, friends_loading } = this.props.friends
+        let {user:{response:{data}}} = this.props
         let result_page =""
         if( !friends_loading ){
             if(response){
@@ -83,7 +84,7 @@ class Friends extends React.Component{
             {result_page}
             <div className="chat-popup">
               {
-                chatList.map((chatObj,index) => <ChatWindow  {...chatObj } history={chatHistory}  key={index}/>)
+                chatList.map((chatObj,index) => <ChatWindow currentUser={data}  {...chatObj } history={chatHistory}  key={index}/>)
                 }
             </div>
         </div>

@@ -48,9 +48,5 @@
     ]
   },
   "devDependencies": {
-    "webpack-dev-server": "3.2.1",
-    "webpack-merge": "^4.2.2",
-    "webpack-validator": "^2.3.0",
-    "webpack": "4.29.6"
   }
 }

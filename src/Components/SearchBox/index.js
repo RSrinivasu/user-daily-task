@@ -9,8 +9,8 @@ import { Button, Badge , Spinner} from 'react-bootstrap'
 function SearchBox(props){
     let { actions , searchList , updateFriend } = props
     let [userInput, setUserInput] = useState("")
-    let [showSuggestions, setShowSuggestions] =useState(false)
-    let [filterSuggestions, setFilterSuggestions] = useState([])
+    let [showSuggestions, setShowSuggestions] =useState(false) 
+    let filterSuggestions =[]
     let [activeSuggestionsIndex, setActiveSuggestionsIndex] = useState(0)
 
     function onChange(e){
@@ -19,16 +19,6 @@ function SearchBox(props){
         setUserInput(value)
         setShowSuggestions(true)
     }
-
-    useEffect(()=>{
-        let { response } = searchList
-        if(response &&  response.data && response.data.length )
-        {
-            setFilterSuggestions(response.data)
-        }else{
-            setFilterSuggestions([])
-        }
-    })
 
     function onClick(update){
         console.log("onclick function ",update)
@@ -39,6 +29,13 @@ function SearchBox(props){
         setActiveSuggestionsIndex(1)
     }
 
+    let { response }= searchList
+    if(response &&  response.data && response.data.length )
+        {
+            filterSuggestions= response.data
+        }else{
+            filterSuggestions = []
+        }    
     return(
     <>
         <Fragment >

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import './chatbox.css'
 
 
@@ -25,6 +25,13 @@ function ChatWindow(props){
       }
     }
 
+    useEffect(()=>{
+        let value = history.length-1
+        console.log("length", value)
+        let  elmnt = document.getElementById(`msg${value}`);
+            if(elmnt) elmnt.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+    })
+
     return(        
         <>
           <div className="chat-container">
@@ -38,7 +45,7 @@ function ChatWindow(props){
                         let { to , msg , status , sendiing_time } = chat
                         let time = new Date(sendiing_time*1000)
                         if(to !== clientId ){
-                        return(<div className="msg-container darker" key={index}>
+                        return(<div className="msg-container darker" key={index} id={`msg${index}`}>
                                     <img src={url} alt="Avatar" style={{width:100}}></img>
                                         <p>{msg}</p>
                                         <span className="time-right">{sendiing_time}</span>
@@ -47,7 +54,7 @@ function ChatWindow(props){
                         }
                         else{
                             return(
-                                <div className="msg-container " key={index}>
+                                <div className="msg-container " key={index} id={`msg${index}`}>
                                 <img src="https://lh3.googleusercontent.com/a-/AAuE7mBigEi8avnJeRzUD7FofuUTdtdc0KLK4Lx9af3Hyw=s96-c"  className="right" alt="Avatar" style={{width:100}}></img>
                                     <p>{msg} </p>
                                     <span className="time-left">{sendiing_time}</span>

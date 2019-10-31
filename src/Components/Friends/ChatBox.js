@@ -9,6 +9,7 @@ function ChatWindow(props){
 
    function onChange(e){
         setInputMsg(e.target.value)
+
    }
 
    function onKeyDown(key){
@@ -22,6 +23,7 @@ function ChatWindow(props){
             }
         window.socket.emit("receiver" , {...msgBody,token:accessToken})
         setHistory([...history,msgBody])
+        setInputMsg("")
       }
     }
 
@@ -55,7 +57,7 @@ function ChatWindow(props){
                         else{
                             return(
                                 <div className="msg-container " key={index} id={`msg${index}`}>
-                                <img src="https://lh3.googleusercontent.com/a-/AAuE7mBigEi8avnJeRzUD7FofuUTdtdc0KLK4Lx9af3Hyw=s96-c"  className="right" alt="Avatar" style={{width:100}}></img>
+                                <img src={props.currentUser.url}  className="right" alt="Avatar" style={{width:100}}></img>
                                     <p>{msg} </p>
                                     <span className="time-left">{sendiing_time}</span>
                                 </div>

@@ -20,8 +20,7 @@ let chatReducer = (state=chatState, action)=>{
         case types.CHAT_FAI:
                 return Object.assign({}, state,{
             })
-
-        
+    
         default:
             return state
     }

@@ -64,12 +64,12 @@ class Friends extends React.Component{
             </Row>
             {result_page}
             <div className="chat-popup">
-              {/* {
+            {
                 chatList.map((chatObj,index) => {
                   return <ChatWindow currentUser={data}  {...chatObj } history={ history }  key={index}/>
                 })
-                } */}
-                {chatList.length > 0?<ChatWindow currentUser={data}  {...chatList[0] } history={ history }  key={1}/>:null}
+            }
+            {/* {chatList.length > 0?<ChatWindow currentUser={data}  {...chatList[0] }   key={1}/>:null} */}
             </div>
         </div>
     )

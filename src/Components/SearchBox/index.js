@@ -102,9 +102,9 @@ function SuggestionsListComponent(props){
         }
         else{
             suggestionsComponent = (
-            <div className="no-suggestions">
-                <em>No suggestions, you're on your own!</em>
-            </div>
+            <ul className="suggestions">
+               <li><em>No suggestions, you're on your own!</em></li> 
+            </ul>
             )
         }
     }

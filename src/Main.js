@@ -1,19 +1,23 @@
 import React from 'react'
 import { Route , Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import * as chatActions from './redux/actions/chatAction'
+
 import  AppPage  from './Components/AppPage/AppPage'
 import _Navbar from './Components/AppPage/NavBar';
 import { Container } from 'react-bootstrap';
 import Firends from './Components/Friends';
     
 function Main(props){
-    let { user } = props
+    let { user , chatActions } = props
+    console.log(chatActions)
 
     if(user.response)
     {
         let { response:{data:{clientId}}} = user
         window.socket.on(clientId,function(msg){
-            console.log("ressssssssssssssssssss",msg)
+            chatActions.updateHistoryObject(msg)
         })
         return(   
         <>
@@ -44,4 +48,9 @@ const mapStateToProps = (state) =>({
    user:state.user
 })
 
-export default connect(mapStateToProps, null) (Main)
+const mapDispatchToprops=(dispatch)=>({
+    chatActions: bindActionCreators(chatActions ,  dispatch)
+})
+ 
+
+export default connect(mapStateToProps, mapDispatchToprops) (Main)

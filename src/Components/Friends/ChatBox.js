@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react"
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import * as chatActions from '../../redux/actions/chatAction'
 import './chatbox.css'
 
 
@@ -9,11 +12,13 @@ function ChatWindow(props){
 
    function onChange(e){
         setInputMsg(e.target.value)
-
    }
 
-   function onKeyDown(key){
-      if(key.keyCode === 13){
+   function onKeyDown(e){
+    let { chatActions  } = props
+
+      if(e.key === "Enter"){
+        
         let msgBody = {
                 to: clientId , 
                 msg: input_msg,
@@ -22,16 +27,17 @@ function ChatWindow(props){
                 sendiing_time:new Date().toDateString()
             }
         window.socket.emit("receiver" , {...msgBody,token:accessToken})
-        setHistory([...history,msgBody])
+        chatActions.updateHistoryObject(clientId)
         setInputMsg("")
+        e.preventDefault();
       }
     }
 
     useEffect(()=>{
         let value = history.length-1
-        console.log("length", value)
         let  elmnt = document.getElementById(`msg${value}`);
-            if(elmnt) elmnt.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+        if(elmnt) elmnt.scrollIntoView({ block: "center", inline: "nearest"})
+        setHistory(props.history)
     })
 
     return(        
@@ -68,9 +74,7 @@ function ChatWindow(props){
             </div>
             <div className="footer">
                 <div className="input-container">
-                    <input type="text" name={input_msg} className="input-field" onChange={onChange} onKeyDown={onKeyDown}/>
-                    {/* <img 
-                    src="/avatar_g2.jpg" alt="Avatar" className="right"  style="width:100%; "></img> */}
+                    <input type="text" name="input_msg" value={input_msg} className="input-field" onChange={onChange} onKeyPress={onKeyDown}/>
                 </div>
             </div>
         </div>
@@ -79,4 +83,9 @@ function ChatWindow(props){
 }
 
 
-export default ChatWindow
+const mapDispatchToprops=(dispatch)=>({
+    chatActions: bindActionCreators(chatActions ,  dispatch)
+})
+ 
+
+export default connect(null,mapDispatchToprops) (ChatWindow)

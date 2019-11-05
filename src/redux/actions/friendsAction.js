@@ -130,6 +130,7 @@ export const updateFriend = (update, searchWord) => {
       let { data } = await axios.put(`${process.env.REACT_APP_USER_TASK_API}/friend`,body ,options)
       dispatch(updateFriendSuccess(data))
       dispatch(searchFriends(searchWord))
+      dispatch(friendsList())
     } catch (e) {
       console.log(e)
       dispatch(updateFriendFail())

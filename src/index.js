@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import history from './redux/history'
 
 import client from 'socket.io-client'
-window.socket = client('http://localhost:3030');
+window.socket = client(process.env.REACT_APP_USER_TASK_API);
 
 window.socket.on('connect', function(){
     console.log("client connection request")

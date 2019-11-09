@@ -60,8 +60,7 @@ export const chatHistory = (obj) => {
     
     let { data:{data} } = await axios.get(`${process.env.REACT_APP_USER_TASK_API}/chat?to=${clientId}`,options)
     history= data
-    chatList =[ obj ]
-    
+    chatList =[ {...obj, isClosed:false} ]
     dispatch(chatSuccess(chatList,history))
     } catch (e) {
       console.log(e)
@@ -102,3 +101,33 @@ export const updateHistoryObject =(clientId)=>{
     }
   }
 } 
+
+export const updateChatList =(clientId, isClosed)=>{
+  return async (dispatch , getState) =>{
+    try{
+      let {
+        chat:{
+            chatList,
+            history
+        }
+      } =getState()
+      
+      chatList = chatList.map((obj)=>{
+        if(obj.clientId === clientId){
+           return {
+             ...obj,
+             isClosed:isClosed
+           }
+        }
+
+      } )
+      console.log(chatList, isClosed , clientId)
+      dispatch(chatSuccess(chatList,history))
+    }
+    catch(e){
+      console.log(e)
+      dispatch(chatFail())
+    }
+  }
+} 
+

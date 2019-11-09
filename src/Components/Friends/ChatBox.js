@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as chatActions from '../../redux/actions/chatAction'
+import closeIcon from '../icons/window-close-solid.svg'
 import './chatbox.css'
 
 
@@ -33,6 +34,11 @@ function ChatWindow(props){
       }
     }
 
+    function onClick(){
+        let { chatActions  } = props
+        chatActions.updateChatList(clientId,true)
+    }
+
     useEffect(()=>{
         let value = history.length-1
         let  elmnt = document.getElementById(`msg${value}`);
@@ -44,8 +50,11 @@ function ChatWindow(props){
         <>
           <div className="chat-container">
             <div className="header">
-                    <img src={url} alt="Avatar" style={{width:100}}></img>
-                    <p>{name}</p>
+                    <div className="left">
+                        <img src={url} alt="Avatar" style={{width:100}}></img>
+                        <p>{name}</p>
+                    </div>
+                    <div className="right" onClick={onClick} ><img src={closeIcon} className="close-icon" ></img></div> 
             </div>
             <div className="msg-body">
                 {

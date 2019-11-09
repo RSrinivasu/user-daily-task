@@ -66,7 +66,14 @@ class Friends extends React.Component{
             <div className="chat-popup">
             {
                 chatList.map((chatObj,index) => {
-                  return <ChatWindow currentUser={data}  {...chatObj } history={ history }  key={index}/>
+                    if(chatObj.isClosed)
+                    {   
+                         return null
+                    }
+                    else
+                    {
+                        return <ChatWindow currentUser={data}  {...chatObj } history={ history }  key={index}/>
+                    }
                 })
             }
             {/* {chatList.length > 0?<ChatWindow currentUser={data}  {...chatList[0] }   key={1}/>:null} */}

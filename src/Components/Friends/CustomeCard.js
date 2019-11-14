@@ -6,7 +6,7 @@ function CustomeCard(props){
     let { url, email, name } = props
 
     return(
-        <Card>
+        <Card style={{ width: '220px', wordWrap: "normal", backgroundColor:"#f8f9fa99" }}>
             {/* <Card.Img variant="top" src="holder.js/100px180" roundedCircle  /> */}
             <Card.Header style={{"textAlign": "-webkit-center"}}>
                 <Col xs={10} md={8}>
@@ -15,9 +15,11 @@ function CustomeCard(props){
             </Card.Header>
             <Card.Body>
                 <Card.Text>{name}</Card.Text> 
-                <span className="text-muted">{email}</span>
+                <div className="text-muted">{email}
+                    {/* <span className="tooltiptext" >{email}</span> */}
+                </div>
             </Card.Body>
-                <Card.Footer className="text-muted" >
+                <Card.Footer>
                     <Row>
                         <Col>Friend</Col>
                         <Col>

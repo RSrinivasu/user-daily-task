@@ -7,9 +7,32 @@ import './chatbox.css'
 
 
 function ChatWindow(props){
-   let { clientId,url, name  , currentUser:{accessToken} } = props
+   let { clientId,url, name  , currentUser } = props
    let [ history, setHistory ] = useState(props.history)
    let [ input_msg , setInputMsg ]= useState("")
+   let [ isTypeing, setIsTypeing ] = useState(false)
+
+   window.socket.on(`${currentUser.clientId}-typeing-status`,function(msg){
+        setIsTypeing(msg)
+    })
+
+    function onBlur(){
+        let msgBody = {
+            to: clientId , 
+            isTypeing:  false,
+            token:  currentUser.accessToken,
+        }
+        window.socket.emit("typeing-status", msgBody)
+    }
+
+    function onFocus(){
+        let msgBody = {
+            to: clientId , 
+            isTypeing:  true,
+            token:  currentUser.accessToken,
+        }
+        window.socket.emit("typeing-status", msgBody)
+    }
 
    function onChange(e){
         setInputMsg(e.target.value)
@@ -24,10 +47,10 @@ function ChatWindow(props){
                 to: clientId , 
                 msg: input_msg,
                 status:"pendding" ,
-                token:accessToken,
+                token: currentUser.accessToken,
                 sendiing_time:new Date().toDateString()
             }
-        window.socket.emit("receiver" , {...msgBody,token:accessToken})
+        window.socket.emit("receiver" , msgBody)
         chatActions.updateHistoryObject(clientId)
         setInputMsg("")
         e.preventDefault();
@@ -83,9 +106,19 @@ function ChatWindow(props){
             </div>
             <div className="footer">
                 <div className="input-container">
-                    <input type="text" name="input_msg" value={input_msg} className="input-field" onChange={onChange} onKeyPress={onKeyDown}/>
+                    <input type="text" name="input_msg" value={input_msg} className="input-field" 
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        onChange={onChange} 
+                        onKeyPress={onKeyDown}/>
                 </div>
-            </div>
+                <div className="typeing-label"> { isTypeing?<span>typing <span className="blink_dot1 dot"></span> 
+                                                    <span className="blink_dot2 dot"></span>
+                                                    <span className="blink_dot3 dot"></span>
+                                                </span>:"" 
+                                                }
+                </div>
+             </div>
         </div>
         </>
     )

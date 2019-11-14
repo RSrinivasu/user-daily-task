@@ -76,7 +76,6 @@ class Friends extends React.Component{
                     }
                 })
             }
-            {/* {chatList.length > 0?<ChatWindow currentUser={data}  {...chatList[0] }   key={1}/>:null} */}
             </div>
         </div>
     )

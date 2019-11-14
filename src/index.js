@@ -13,12 +13,9 @@ import history from './redux/history'
 import client from 'socket.io-client'
 window.socket = client(process.env.REACT_APP_SOCKET_END_POINT);
 
-window.socket.on('connect', function(){
+window.socket.on('connect', function(e){
     console.log("client connection request")
 });
-
-
-
 
 ReactDOM.render(
 <Provider store= {store}>

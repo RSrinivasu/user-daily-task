@@ -3,7 +3,6 @@ import {Container, Button, Row,  Col} from 'react-bootstrap'
 import {InputGroup , FormControl, Form} from 'react-bootstrap'
 import usericon from '../icons/user-regular.svg'
 import passwordicon from '../icons/lock-solid.svg'
-import google from '../icons/google-brands.svg'
 import AlertBox from "../utilities/AlertBox";
 import CustomFBLoginButton from "./FacebookLogin"
 import CustomGoogleButton from "./GoogleLoogin";

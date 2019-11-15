@@ -31,12 +31,12 @@ let userReducer = (state=userState, action)=>{
                     app_loading:false
             })
         
-        case types.USER_LOGIN_SUC:
+        case types.USER_LOGOUT_SUC:
                 return Object.assign({}, state,{
                     response: null,
                     app_loading:false
             })
-        case types.USER_LOGIN_REQ:
+        case types.USER_LOGOUT_FAI:
                 return Object.assign({}, state,{
                     response: action.data,
                     app_loading:false

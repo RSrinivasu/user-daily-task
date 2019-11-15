@@ -11,7 +11,7 @@ class CustomFBLoginButton extends React.Component
 {
     facebookLoginHandle =(res)=>{
         console.log("facebook ",res)
-        if(res.status != "unknown" )
+        if(res.status !== "unknown" )
         {
             let data = {
                 name: res.name,

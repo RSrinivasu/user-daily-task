@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { Navbar ,Nav, Button}from 'react-bootstrap'
 import * as userAction from '../../redux/actions/userAction'
-import history  from '../../redux/history'
 
 function _Navbar(props){
     let {
@@ -11,11 +10,6 @@ function _Navbar(props){
            url,name
         } 
     } = props.user.response
-
-    function onSelect(e,s){
-        console.log(e,s)
-
-    }
 
     return(
     <>

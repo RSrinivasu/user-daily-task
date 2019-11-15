@@ -1,9 +1,4 @@
 import React from 'react'
-import _Navbar from './NavBar';
-// import { Carousel } from 'react-bootstrap';
-
-import Carousel from '../Carousel'
-import PureCarousel from '../PureCarousel';
 
 class AppPage extends React.Component
 {

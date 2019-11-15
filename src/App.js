@@ -1,16 +1,12 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
-import { Route , Switch, Redirect} from 'react-router-dom'
+import { Route , Switch} from 'react-router-dom'
 import Login  from './Components/Authentication/Login'
 import Main from './Main'
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
   
-
   render(){
     return (
       <div>

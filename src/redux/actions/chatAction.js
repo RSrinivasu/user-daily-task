@@ -119,6 +119,9 @@ export const updateChatList =(clientId, isClosed)=>{
              isClosed:isClosed
            }
         }
+        else{
+          return obj
+        }
 
       } )
       console.log(chatList, isClosed , clientId)

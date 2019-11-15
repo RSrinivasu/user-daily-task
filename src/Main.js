@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as chatActions from './redux/actions/chatAction'
 
 import  AppPage  from './Components/AppPage/AppPage'
-import _Navbar from './Components/AppPage/NavBar';
+import NavBar from './Components/AppPage/NavBar';
 import { Container } from 'react-bootstrap';
 import Firends from './Components/Friends';
     
@@ -21,7 +21,7 @@ function Main(props){
         })
         return(   
         <>
-            <_Navbar />     
+            <NavBar></NavBar>     
             <Container>
                 {/* <Route path="/" exact render={ ()=> <Redirect to="/user-dialy-task"/> }/>  */}
                 <Route exact path="/" render={()=><AppPage />} />
